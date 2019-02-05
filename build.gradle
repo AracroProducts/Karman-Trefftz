@@ -1,31 +1,45 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'com.android.application'
+apply plugin: 'com.chaquo.python'
 
-buildscript {
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.aracro.python.KarmanTrefftz"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        python {
+            // If Chaquopy fails to find Python on your build machine, enable the following
+            // line and edit it to point to a Python 3.4+ executable.
+            buildPython "/usr/bin/python3.4"
 
-    repositories {
-        google()
-        jcenter()
-        maven { url "https://chaquo.com/maven" }
+            pip {
+                install "numpy"
+                install "matplotlib"
+                install "scipy"
+            }
+
+            staticProxy "KarmanTrefftz"
+        }
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
-
-        // Newer versions may be available: please check here:
-        // https://chaquo.com/chaquopy/doc/current/changelog.html
-        classpath 'com.chaquo.python:gradle:5.1.2'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
