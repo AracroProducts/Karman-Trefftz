@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.aracro.mg.python.KarmanTrefftz"
+    android:icon="@mipmap/ic_launcher"
+    android:roundIcon="@mipmap/ic_launcher_round">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:required="true" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:required="true" />
+
+    <application
+        android:name="com.chaquo.python.android.PyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:launchMode="standard">
+        <activity android:name="com.aracro.python.KarmanTrefftz.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="KarmanTrefftz.GraphOutput"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName="com.aracro.python.KarmanTrefftz.MainActivity"/>
+        <activity android:name="com.aracro.python.KarmanTrefftz.Settings"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName="com.aracro.python.KarmanTrefftz.MainActivity"/>
+    </application>
+
+</manifest>
